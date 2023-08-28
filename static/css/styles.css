@@ -53,8 +53,10 @@ a {
     text-decoration: none; /* Remove default underline for links */
 }
 
+
 .button:hover {
     background-color: #16893e; /* Slightly darker green color on hover */
+    color: white 
 }
 
 .detail-name {
@@ -87,4 +89,8 @@ a {
     height: 125px;
     border-radius: 50%;
     /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+}
+
+a:hover {
+    color: red 
 }
