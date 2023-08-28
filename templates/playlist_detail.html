@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Playlist Detail</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Artist Count for <span class="playlist-name">{{ playlist_name }}</span></h1>
+        <ul>
+            {% for artist, count in artist_counts.items() %}
+            <li>{{ artist }}: {{ count }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>
