@@ -30,7 +30,7 @@ a {
 }
 
 a:hover {
-    color: #0056b3;
+    color: #ff0000;
 }
 
 .container {
@@ -59,7 +59,34 @@ a:hover {
     background-color: #e74c3c;
 }
 
-.container h1 .playlist-name {
+.detail-name {
     color: red;
     font-weight: bold;
+}
+
+.analysis-box {
+    border: 1px solid #ddd;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    max-height: 300px; /* Set a maximum height for scrollable boxes */
+    overflow: auto; /* Enable scrolling when content exceeds the max height */
+}
+
+.playlist-cover {
+    display: block;
+    margin: 20px auto;
+    max-width: 300px; /* Set a maximum width for the cover image */
+}
+
+.user-profile {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.user-profile img {
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
 }

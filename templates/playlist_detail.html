@@ -6,12 +6,25 @@
 </head>
 <body>
     <div class="container">
-        <h1>Artist Count for <span class="playlist-name">{{ playlist_name }}</span></h1>
-        <ul>
-            {% for artist, count in artist_counts.items() %}
-            <li>{{ artist }}: {{ count }}</li>
-            {% endfor %}
-        </ul>
+        <h1>Playlist Analysis for <span class="detail-name">{{ playlist_name }}</span></h1>
+        <!-- Display the cover image -->
+        <img src="{{ cover_image_url }}" alt="Playlist Cover" class="playlist-cover">
+        <h2>Artist Count</h2>
+        <div class="analysis-box">
+            <ul>
+                {% for artist, count in artist_counts.items() %}
+                <li><span class="detail-name">{{ artist }}</span>: {{ count }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <h2>Track Popularity</h2>
+        <div class="analysis-box">
+            <ul>
+                {% for track_name, popularity in sorted_track_popularity %}
+                <li>{{ track_name }} <span class="detail-name">(Popularity: {{ popularity }}</span>)</li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 

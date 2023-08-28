@@ -31,6 +31,33 @@ def redirectPage():
     return redirect(url_for('getPlaylists', _external=True))
 
 
+# @app.route('/getPlaylists')
+# def getPlaylists():
+#     try:
+#         token_info = get_token()
+#     except:
+#         print("user not logged in")
+#         return redirect(url_for("login", _external=False))
+        
+#     sp = spotipy.Spotify(auth=token_info['access_token'])
+#     all_playlists = []
+#     iteration = 0
+#     while True:
+#         items = sp.current_user_playlists(limit=50, offset=iteration * 50)['items']
+#         iteration += 1
+#         # all_playlists += items
+#         all_playlists.append(items)
+#         if len(items) < 50:
+#             break
+#     # return (all_playlists)
+#     playlist_names = []
+#     for x in all_playlists:
+#         for y in x:
+#             name = y['name']
+#             playlist_names.append(name) 
+#     # return str(playlist_names)
+#     return render_template('playlists.html', playlist_names=playlist_names)
+
 @app.route('/getPlaylists')
 def getPlaylists():
     try:
@@ -40,23 +67,28 @@ def getPlaylists():
         return redirect(url_for("login", _external=False))
         
     sp = spotipy.Spotify(auth=token_info['access_token'])
+    user_info = sp.me()  # Fetch the user's information
+    user_display_name = user_info['display_name']  # Get the user's display name
+    user_profile_picture = user_info['images'][0]['url'] if user_info['images'] else None
+
+
     all_playlists = []
+    sp.user
     iteration = 0
     while True:
         items = sp.current_user_playlists(limit=50, offset=iteration * 50)['items']
         iteration += 1
-        # all_playlists += items
-        all_playlists.append(items)
+        all_playlists.extend(items)
         if len(items) < 50:
             break
-    # return (all_playlists)
-    playlist_names = []
-    for x in all_playlists:
-        for y in x:
-            name = y['name']
-            playlist_names.append(name) 
-    # return str(playlist_names)
-    return render_template('playlists.html', playlist_names=playlist_names)
+            
+    # Sort playlists based on the user's name (display name)
+    all_playlists.sort(key=lambda x: x['owner']['display_name'])
+    
+    playlist_names = [playlist['name'] for playlist in all_playlists]
+    
+    return render_template('playlists.html', playlist_names=playlist_names, user_display_name=user_display_name, user_profile_picture=user_profile_picture)
+
 
 @app.route('/playlist/<playlist_name>')
 def playlist_detail(playlist_name):
@@ -87,6 +119,10 @@ def playlist_detail(playlist_name):
     if playlist_id is None:
         return "Playlist not found"
     
+    # Fetch playlist details to get cover image URL
+    playlist = sp.playlist(playlist_id)
+    cover_image_url = playlist['images'][0]['url']
+    
     # Fetch all playlist tracks
     playlist_tracks = []
     offset = 0
@@ -99,16 +135,9 @@ def playlist_detail(playlist_name):
     
     # Calculate artist count using the count_artists function
     artist_counts = count_artists(playlist_tracks)
+    sorted_track_popularity = analyze_track_popularity(playlist_tracks)
     
-    return render_template('playlist_detail.html', playlist_name = playlist_name, artist_counts=artist_counts)
-
-# def count_artists(playlist_data):
-#     artist_counts = {}
-#     for track in playlist_data['items']:
-#         for artist in track['track']['artists']:
-#             artist_name = artist['name']
-#             artist_counts[artist_name] = artist_counts.get(artist_name, 0) + 1
-#     return artist_counts   
+    return render_template('playlist_detail.html', playlist_name=playlist_name, artist_counts=artist_counts, sorted_track_popularity=sorted_track_popularity, cover_image_url=cover_image_url)
 
 def count_artists(playlist_tracks):
     artist_counts = {}
@@ -120,25 +149,16 @@ def count_artists(playlist_tracks):
     # Sort the artist counts in descending order
     sorted_artist_counts = dict(sorted(artist_counts.items(), key=lambda item: item[1], reverse=True))
     return sorted_artist_counts
-
  
     
-# def analyze_track_popularity(playlist_data):
-#     track_popularity = []
-#     for track in playlist_data['items']:
-#         track_name = track['track']['name']
-#         popularity = track['track']['popularity']
-#         track_popularity.append((track_name, popularity))
-#     sorted_track_popularity = sorted(track_popularity, key=lambda x: x[1], reverse=True)
-#     return sorted_track_popularity
-
-# def count_artists(playlist_data):
-#     artist_counts = {}
-#     for track in playlist_data['items']:
-#         for artist in track['track']['artists']:
-#             artist_name = artist['name']
-#             artist_counts[artist_name] = artist_counts.get(artist_name, 0) + 1
-#     return artist_counts
+def analyze_track_popularity(playlist_tracks):
+    track_popularity = []
+    for track in playlist_tracks:
+        track_name = track['track']['name']
+        popularity = track['track']['popularity']
+        track_popularity.append((track_name, popularity))
+    sorted_track_popularity = sorted(track_popularity, key=lambda x: x[1], reverse=True)
+    return sorted_track_popularity
 
 def get_token():
     token_info = session.get(TOKEN_INFO, None)  # if the value doesn't exist turn none
