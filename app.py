@@ -35,33 +35,6 @@ def redirectPage():
     return redirect(url_for('getPlaylists', _external=True))
 
 
-# @app.route('/getPlaylists')
-# def getPlaylists():
-#     try:
-#         token_info = get_token()
-#     except:
-#         print("user not logged in")
-#         return redirect(url_for("login", _external=False))
-        
-#     sp = spotipy.Spotify(auth=token_info['access_token'])
-#     all_playlists = []
-#     iteration = 0
-#     while True:
-#         items = sp.current_user_playlists(limit=50, offset=iteration * 50)['items']
-#         iteration += 1
-#         # all_playlists += items
-#         all_playlists.append(items)
-#         if len(items) < 50:
-#             break
-#     # return (all_playlists)
-#     playlist_names = []
-#     for x in all_playlists:
-#         for y in x:
-#             name = y['name']
-#             playlist_names.append(name) 
-#     # return str(playlist_names)
-#     return render_template('playlists.html', playlist_names=playlist_names)
-
 @app.route('/getPlaylists')
 def getPlaylists():
     try:
@@ -86,8 +59,8 @@ def getPlaylists():
         if len(items) < 50:
             break
             
-    # Sort playlists based on the user's name (display name)
-    all_playlists.sort(key=lambda x: x['owner']['display_name'])
+    # Sort playlists by name in alphabetical order
+    all_playlists.sort(key=lambda x: x['name'].lower())
     
     playlist_names = [playlist['name'] for playlist in all_playlists]
     
