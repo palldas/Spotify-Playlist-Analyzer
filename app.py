@@ -14,6 +14,10 @@ app.config['SESSION_COOKIE_NAME'] = 'Test Pall Cookie'
 TOKEN_INFO = "token_info"
 
 @app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/login')
 def login():
     # return 'pls work omg'
     sp_oauth = create_spotify_oauth()

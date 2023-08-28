@@ -1,0 +1,16 @@
+<!-- templates/index.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spotify Playlist Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Spotify Playlist Analyzer</h1>
+        <p>Explore and analyze your Spotify playlists.</p>
+        <a href="{{ url_for('login') }}" class="button">Login with Spotify</a>
+    </div>
+</body>
+</html>
