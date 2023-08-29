@@ -5,8 +5,10 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
+    {% include 'navbar.html' %}  <!-- Include the navbar -->
     <div class="container">
-        <h1>Playlist Analysis for <span class="detail-name">{{ playlist_name }}</span></h1>
+        <h1>Playlist Analysis for <span class="detail-name"><a href="{{ playlist_external_urls }}" class="playlist-link" target="_blank">{{ playlist_name }}</a></span></h1>
+
         <!-- Display the cover image -->
         <img src="{{ cover_image_url }}" alt="Playlist Cover" class="playlist-cover">
         <h2>Artist Count</h2>

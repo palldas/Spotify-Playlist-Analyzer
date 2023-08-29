@@ -94,3 +94,34 @@ a {
 a:hover {
     color: red 
 }
+
+
+/* styles.css */
+.navbar {
+    background-color: #1DB954;
+    padding: 10px 20px; /* Add padding to space out links */
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Vertically center items */
+}
+
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex; /* Use flexbox for horizontal layout */
+}
+
+.navbar li {
+    margin-right: 20px;
+}
+
+.navbar li.nav-home {
+    margin-right: auto; /* Push home button to the left corner */
+}
+
+.navbar a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}

@@ -4,6 +4,7 @@ from flask import Flask, request, url_for, session, redirect, render_template
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 import time
+import re
 
 
 app = Flask(__name__)
@@ -67,6 +68,66 @@ def getPlaylists():
     return render_template('playlists.html', playlist_names=playlist_names, user_display_name=user_display_name, user_profile_picture=user_profile_picture)
 
 
+@app.route('/analyze', methods=['GET', 'POST'])
+def analyze_playlist():
+    if request.method == 'POST':
+        playlist_url = request.form.get('playlist_url')
+        playlist_id = extract_playlist_id(playlist_url)
+        if playlist_id:
+            # Redirect to playlist detail page with extracted playlist_id
+            return redirect(url_for('playlist_detail_url', playlist_url=playlist_url))
+        else:
+            error_message = "Invalid playlist URL"
+            return render_template('analyze_url.html', error_message=error_message)
+    return render_template('analyze_url.html')
+
+def extract_playlist_id(playlist_url):
+    # Define a regular expression pattern to match playlist URLs
+    pattern = r'^https:\/\/open\.spotify\.com\/playlist\/([a-zA-Z0-9]+)'
+
+    # Use the re.match function to find the playlist ID
+    match = re.match(pattern, playlist_url)
+
+    if match:
+        playlist_id = match.group(1)  # Extract the playlist ID from the matched group
+        return playlist_id
+
+    return None  # Return None if no match is found
+
+
+@app.route('/playlist_url')
+def playlist_detail_url():
+    playlist_url = request.args.get('playlist_url')
+    if not playlist_url:
+        return "Invalid playlist URL"
+
+    playlist_id = extract_playlist_id(playlist_url)
+    if not playlist_id:
+        return "Invalid playlist URL"
+
+    token_info = get_token()
+    sp = spotipy.Spotify(auth=token_info['access_token'])
+
+    playlist = sp.playlist(playlist_id)  # Fetch playlist details
+    cover_image_url = playlist['images'][0]['url']
+
+    playlist_tracks = []
+    offset = 0
+    while True:
+        response = sp.playlist_tracks(playlist_id, limit=100, offset=offset)
+        playlist_tracks.extend(response['items'])
+        offset += 100
+        if len(response['items']) < 100:
+            break
+
+    artist_counts = count_artists(playlist_tracks)
+    sorted_track_popularity = analyze_track_popularity(playlist_tracks)
+    # Fetch the playlist's external URLs, specifically the Spotify URL
+    playlist_external_urls = playlist.get('external_urls', {}).get('spotify', None)
+    
+    return render_template('playlist_detail.html', playlist_name=playlist['name'], artist_counts=artist_counts, sorted_track_popularity=sorted_track_popularity, cover_image_url=cover_image_url, playlist_external_urls=playlist_external_urls)
+
+
 @app.route('/playlist/<playlist_name>')
 def playlist_detail(playlist_name):
     try:
@@ -113,8 +174,12 @@ def playlist_detail(playlist_name):
     # Calculate artist count using the count_artists function
     artist_counts = count_artists(playlist_tracks)
     sorted_track_popularity = analyze_track_popularity(playlist_tracks)
+    # Fetch the playlist's external URLs, specifically the Spotify URL
+    playlist_external_urls = playlist.get('external_urls', {}).get('spotify', None)
     
-    return render_template('playlist_detail.html', playlist_name=playlist_name, artist_counts=artist_counts, sorted_track_popularity=sorted_track_popularity, cover_image_url=cover_image_url)
+    return render_template('playlist_detail.html', playlist_name=playlist['name'], artist_counts=artist_counts, sorted_track_popularity=sorted_track_popularity, cover_image_url=cover_image_url, playlist_external_urls=playlist_external_urls)
+
+
 
 def count_artists(playlist_tracks):
     artist_counts = {}
