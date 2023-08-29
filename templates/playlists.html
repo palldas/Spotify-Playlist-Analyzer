@@ -7,7 +7,7 @@
 <body>
     {% include 'navbar.html' %}  <!-- Include the navbar -->
     <div class="container">
-        <div class="user-profile">
+        <div class="user-profile"> <!-- TODO why is the pfp blurry ugh -->
             {% if user_profile_picture %}
             <img src="{{ user_profile_picture }}" alt="Profile Picture">
             {% endif %}

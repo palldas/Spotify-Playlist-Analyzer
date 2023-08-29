@@ -1,127 +1,131 @@
 /* styles.css */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f9f9f9;
-    margin: 0;
-    padding: 0;
+  font-family: "Arial", sans-serif;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 0;
 }
 
 h1 {
-    color: #333;
-    text-align: center;
-    margin-top: 30px;
-    font-size: 2.5rem;
+  color: #333;
+  text-align: center;
+  margin-top: 30px;
+  font-size: 2.5rem;
 }
 
 ul {
-    list-style-type: none;
-    padding: 0;
+  list-style-type: none;
+  padding: 0;
 }
 
 li {
-    margin: 10px 0;
+  margin: 10px 0;
 }
 
 a {
-    text-decoration: none;
-    color: #007bff;
-    font-weight: bold;
-    transition: color 0.3s;
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+  transition: color 0.3s;
 }
 
-
-
 .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #1DB954; /* Spotify green color */
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1.2rem;
-    transition: background-color 0.3s;
-    text-decoration: none; /* Remove default underline for links */
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #1db954; /* Spotify green color */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: background-color 0.3s;
+  text-decoration: none; /* Remove default underline for links */
 }
 
-
 .button:hover {
-    background-color: #16893e; /* Slightly darker green color on hover */
-    color: white 
+  background-color: #16893e; /* Slightly darker green color on hover */
+  color: white;
 }
 
 .detail-name {
-    color: red;
-    font-weight: bold;
+  color: red;
+  font-weight: bold;
 }
 
 .analysis-box {
-    border: 1px solid #ddd;
-    margin-top: 20px;
-    padding: 10px;
-    border-radius: 5px;
-    max-height: 300px; /* Set a maximum height for scrollable boxes */
-    overflow: auto; /* Enable scrolling when content exceeds the max height */
+  border: 1px solid #ddd;
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  max-height: 300px; /* Set a maximum height for scrollable boxes */
+  overflow: auto; /* Enable scrolling when content exceeds the max height */
 }
 
 .playlist-cover {
-    display: block;
-    margin: 20px auto;
-    max-width: 300px; /* Set a maximum width for the cover image */
+  display: block;
+  margin: 20px auto;
+  max-width: 300px; /* Set a maximum width for the cover image */
 }
 
 .user-profile {
-    text-align: center;
-    margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .user-profile img {
-    width: 125px;
-    height: 125px;
-    border-radius: 50%;
-    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+  width: 125px;
+  height: 125px;
+  border-radius: 50%;
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
 }
 
 a:hover {
-    color: red 
+  color: red;
 }
-
 
 /* styles.css */
 .navbar {
-    background-color: #1DB954;
-    padding: 10px 20px; /* Add padding to space out links */
-    display: flex; /* Use flexbox for layout */
-    align-items: center; /* Vertically center items */
+  background-color: #1db954;
+  padding: 10px 20px; /* Add padding to space out links */
+  display: flex; /* Use flexbox for layout */
+  align-items: center; /* Vertically center items */
 }
 
-
 .navbar ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex; /* Use flexbox for horizontal layout */
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex; /* Use flexbox for horizontal layout */
 }
 
 .navbar li {
-    margin-right: 20px;
+  margin-right: 20px;
 }
 
 .navbar li.nav-home {
-    margin-right: auto; /* Push home button to the left corner */
+  margin-right: auto; /* Push home button to the left corner */
 }
 
 .navbar a {
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+.playlist-cover.with-shadow:hover {
+  -o-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  box-shadow: 10px 10px 5px #888888;
 }

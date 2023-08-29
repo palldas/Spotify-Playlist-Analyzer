@@ -10,7 +10,9 @@
         <h1>Playlist Analysis for <span class="detail-name"><a href="{{ playlist_external_urls }}" class="playlist-link" target="_blank">{{ playlist_name }}</a></span></h1>
 
         <!-- Display the cover image -->
-        <img src="{{ cover_image_url }}" alt="Playlist Cover" class="playlist-cover">
+        <a href="{{ playlist_external_urls }}" class="playlist-link" target="_blank">
+            <img src="{{ cover_image_url }}" alt="Playlist Cover" class="playlist-cover with-shadow">
+        </a>
         <h2>Artist Count</h2>
         <div class="analysis-box">
             <ul>
