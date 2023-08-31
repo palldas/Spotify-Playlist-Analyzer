@@ -129,3 +129,46 @@ a:hover {
   transition: 0.3s;
   box-shadow: 10px 10px 5px #888888;
 }
+
+
+/* Style for drop-down menus */
+.select-container {
+  position: relative;
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.select-container select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: 1px solid #ddd;
+  padding: 8px;
+  border-radius: 5px;
+  background-color: #fff;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  width: 200px;
+}
+
+/* Arrow icon */
+.select-container::after {
+  content: '\25BC'; /* Unicode character for downward arrow */
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  font-size: 16px;
+}
+
+/* Style for options */
+.select-container select:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+/* Hover effect */
+.select-container:hover select {
+  border-color: #007bff;
+}

@@ -14,23 +14,51 @@
             <img src="{{ cover_image_url }}" alt="Playlist Cover" class="playlist-cover with-shadow">
         </a>
         <h2>Artist Count</h2>
-        <div class="analysis-box">
-            <ul>
-                {% for artist, count in artist_counts.items() %}
-                <li><span class="detail-name">{{ artist }}</span>: {{ count }}</li>
-                {% endfor %}
-            </ul>
-        </div>
-        <h2>Track Popularity</h2>
-        <div class="analysis-box">
-            <ul>
-                {% for track_name, popularity in sorted_track_popularity %}
-                <li>{{ track_name }} <span class="detail-name">(Popularity: {{ popularity }}</span>)</li>
-                {% endfor %}
-            </ul>
+    <div class="sorting-options">
+        <div class="select-container">
+            <label for="artist-sort">Sort by:</label>
+            <select id="artist-sort">
+                <option value="count">Highest to Lowest</option>
+                <option value="countLowToHigh">Lowest to Highest</option>
+                <option value="alphabetical">Alphabetical A-Z</option>
+                <option value="reverseAlphabetical">Alphabetical Z-A</option>
+            </select>
         </div>
     </div>
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <div class="analysis-box artist-count-box">
+        <ul id="artist-list">
+            <!-- Artist count list will be dynamically generated here -->
+            {% for artist, count in artist_counts.items() %}
+            <li><span class="detail-name">{{ artist }}</span>: {{ count }}</li>
+            {% endfor %}
+        </ul>
+    </div>
 
+    <h2>Track Popularity Index</h2>
+    <div class="sorting-options">
+        <div class="select-container">
+            <label for="track-sort">Sort by:</label>
+            <select id="track-sort">
+                <option value="popularity">Highest to Lowest</option>
+                <option value="popularityLowToHigh">Lowest to Highest</option>
+                <option value="alphabetical">Alphabetical A-Z</option>
+                <option value="reverseAlphabetical">Alphabetical Z-A</option>
+            </select>
+        </div>
+    </div>
+    <div class="analysis-box track-popularity-box">
+        <ul id="track-list">
+            <!-- Track popularity list will be dynamically generated here -->
+            {% for track_name, popularity in sorted_track_popularity %}
+            <li><span class="detail-name">{{ track_name }}</span>: {{ popularity }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+        <script>
+            var sortedTrackPopularity = {{ sorted_track_popularity | tojson }};
+            var artistCounts = {{ artist_counts | tojson }};
+        </script>
+        
+        <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
