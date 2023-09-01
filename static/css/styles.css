@@ -2,6 +2,7 @@
 body {
   font-family: "Arial", sans-serif;
   background-color: #f9f9f9;
+  /* background-color: #303030; */
   margin: 0;
   padding: 0;
 }
@@ -93,18 +94,19 @@ a:hover {
 }
 
 /* styles.css */
+
+/* Navbar styles */
 .navbar {
   background-color: #1db954;
-  padding: 10px 20px; /* Add padding to space out links */
-  display: flex; /* Use flexbox for layout */
-  align-items: center; /* Vertically center items */
+  padding: 10px 20px;
 }
 
 .navbar ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  display: flex; /* Use flexbox for horizontal layout */
+  display: flex;
+  align-items: center; /* Center align items vertically */
 }
 
 .navbar li {
@@ -112,14 +114,41 @@ a:hover {
 }
 
 .navbar li.nav-home {
-  margin-right: auto; /* Push home button to the left corner */
+  margin-right: auto;
 }
 
 .navbar a {
   text-decoration: none;
   color: white;
   font-weight: bold;
+  transition: color 0.3s;
 }
+
+.navbar a:hover {
+  color: #ffffff; /* Change color on hover */
+}
+
+/* Add styles for the new sections */
+.navbar li:nth-child(2),
+.navbar li:nth-child(3),
+.navbar li:nth-child(4) {
+  background-color: #16893e; /* Change background color for sections */
+  border-radius: 5px;
+  padding: 8px 15px;
+}
+
+.navbar li:nth-child(2) a,
+.navbar li:nth-child(3) a,
+.navbar li:nth-child(4) a {
+  color: white;
+}
+
+.navbar li:nth-child(2) a:hover,
+.navbar li:nth-child(3) a:hover,
+.navbar li:nth-child(4) a:hover {
+  color: #ffffff; /* Change color on hover */
+}
+
 
 .playlist-cover.with-shadow:hover {
   -o-transition: 0.3s;
@@ -170,5 +199,36 @@ a:hover {
 
 /* Hover effect */
 .select-container:hover select {
+  border-color: #007bff;
+}
+
+
+
+/* Add CSS styles for the search bar and sorting options with switched positions */
+.search-sort-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* Adjust the input field width and padding */
+.search-container input[type="text"] {
+  width: 95%; /* Changed from 94% to 100% */
+  padding: 10px; /* Changed from 15px to 10px */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #333;
+  background-color: #fff;
+  transition: border-color 0.3s;
+}
+
+.search-container input[type="text"]:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+/* Hover effect */
+.select-container:hover {
   border-color: #007bff;
 }

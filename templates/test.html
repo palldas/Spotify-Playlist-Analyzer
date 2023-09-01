@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sentiment Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <h1>Sentiment Analysis</h1>
+    <form action="/analyze_sentiment" method="post">
+        <textarea name="text" rows="4" cols="50"></textarea>
+        <br>
+        <button type="submit">Analyze</button>
+    </form>
+</body>
+</html>

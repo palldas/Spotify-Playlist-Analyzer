@@ -1,9 +1,10 @@
-<!-- templates/analyze.html -->
+<!-- templates/analyze_url.html -->
 <!DOCTYPE html>
 <html>
 <head>
     <title>Analyze Playlist</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
     {% include 'navbar.html' %}  <!-- Include the navbar -->
@@ -11,7 +12,7 @@
         <h1>Analyze Playlist</h1>
         <form action="{{ url_for('analyze_playlist') }}" method="post">
             <input type="text" name="playlist_url" placeholder="Enter Spotify Playlist URL" style="width: 550px;height: 40px;">
-            <button type="submit" class="button">Analyze</button>
+            <button type="submit" class="button"><strong>Analyze</strong></button>
         </form>
     </div>
 </body>

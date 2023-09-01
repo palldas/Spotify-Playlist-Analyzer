@@ -3,22 +3,52 @@
 <head>
     <title>My Playlists</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
     {% include 'navbar.html' %}  <!-- Include the navbar -->
     <div class="container">
-        <div class="user-profile"> <!-- TODO why is the pfp blurry ugh -->
+        <div class="user-profile">
             {% if user_profile_picture %}
             <img src="{{ user_profile_picture }}" alt="Profile Picture">
             {% endif %}
         </div>
         <h1><span class="detail-name">{{ user_display_name }}'s</span> Playlists</h1>
-        <ul>
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Search for a Playlist...">
+        </div>
+        <ul class="playlist-container">
             {% for playlist_name in playlist_names %}
-            <li><a href="{{ url_for('playlist_detail', playlist_name=playlist_name) }}">{{ playlist_name }}</a></li>
+            <li class="playlist-item" data-name="{{ playlist_name }}" data-user="{{ user_display_name }}" data-duration="3:45">
+                <a href="{{ url_for('playlist_detail', playlist_name=playlist_name) }}">{{ playlist_name }}</a>
+            </li>
             {% endfor %}
         </ul>
     </div>
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const searchInput = document.getElementById("search");
+            const playlistItems = document.querySelectorAll(".playlist-item");
+
+            // Function to filter playlist items based on search input
+            function searchPlaylist() {
+                const searchTerm = searchInput.value.toLowerCase().trim();
+
+                playlistItems.forEach((item) => {
+                    const name = item.getAttribute("data-name").toLowerCase();
+                    const user = item.getAttribute("data-user").toLowerCase();
+
+                    if (name.includes(searchTerm) || user.includes(searchTerm)) {
+                        item.style.display = "block";
+                    } else {
+                        item.style.display = "none";
+                    }
+                });
+            }
+
+            // Event listener for search input
+            searchInput.addEventListener("input", searchPlaylist);
+        });        
+    </script>
 </body>
 </html>

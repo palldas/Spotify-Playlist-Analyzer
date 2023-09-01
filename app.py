@@ -1,10 +1,13 @@
 # from lib2to3.pgen2 import token
 # from re import I
-from flask import Flask, request, url_for, session, redirect, render_template
+from flask import Flask, request, url_for, session, redirect, render_template, request
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 import time
 import re
+from flask_mail import Message, Mail
+from textblob import TextBlob
+from datetime import timedelta
 
 
 app = Flask(__name__)
@@ -13,6 +16,7 @@ app = Flask(__name__)
 app.secret_key = "somethingrandom54321"
 app.config['SESSION_COOKIE_NAME'] = 'Test Pall Cookie'
 TOKEN_INFO = "token_info"
+app.permanent_session_lifetime = timedelta(minutes=60)  #added so i don't have to keep deleting the .cache file let's see if this works pls, Set an appropriate session lifetime
 
 @app.route('/')
 def index():
@@ -219,3 +223,23 @@ def create_spotify_oauth():
         client_secret = "ebece8f7edfd4bf681d0c55a754fa321",
         redirect_uri=url_for('redirectPage', _external=True),
         scope="user-library-read playlist-read-private")
+
+# was testing something random with ai ignore    
+@app.route('/analyze_sentiment', methods=['POST'])
+def analyze_sentiment():
+    text = request.form['text']
+    blob = TextBlob(text)
+    sentiment = blob.sentiment
+
+    if sentiment.polarity > 0:
+        sentiment_label = 'Positive'
+    elif sentiment.polarity < 0:
+        sentiment_label = 'Negative'
+    else:
+        sentiment_label = 'Neutral'
+
+    return render_template('result.html', text=text, sentiment=sentiment_label)
+
+@app.route('/test')
+def test():
+    return render_template('test.html')

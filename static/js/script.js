@@ -68,3 +68,41 @@ function updateTrackList(sortedTracks) {
         trackList.appendChild(listItem);
     });
 }
+
+// Search for artist
+const artistSearchInput = document.getElementById('artist-search');
+artistSearchInput.addEventListener('input', () => {
+    const searchText = artistSearchInput.value.toLowerCase();
+    filterArtists(searchText);
+});
+
+function filterArtists(searchText) {
+    const artistItems = document.querySelectorAll('#artist-list li');
+    artistItems.forEach((item) => {
+        const artistName = item.querySelector('.detail-name').textContent.toLowerCase();
+        if (artistName.includes(searchText)) {
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+}
+
+// Search for track
+const trackSearchInput = document.getElementById('track-search');
+trackSearchInput.addEventListener('input', () => {
+    const searchText = trackSearchInput.value.toLowerCase();
+    filterTracks(searchText);
+});
+
+function filterTracks(searchText) {
+    const trackItems = document.querySelectorAll('#track-list li');
+    trackItems.forEach((item) => {
+        const trackName = item.querySelector('.detail-name').textContent.toLowerCase();
+        if (trackName.includes(searchText)) {
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+}

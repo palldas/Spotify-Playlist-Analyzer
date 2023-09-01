@@ -1,18 +1,86 @@
-<!-- templates/index.html -->
-
 <!DOCTYPE html>
 <html>
 <head>
     <title>Spotify Playlist Analyzer</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Additional CSS styling */
+        .feature-section {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            
+        }
+
+        .feature-list {
+            list-style-type: disc;
+            margin-left: 20px;
+            color: #555;
+        }
+
+        .additional-content {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .content-paragraph {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #555;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px; /* Add some top margin for spacing */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .button-container .button {
+            display: inline-block;
+            margin: 10px; /* Add some horizontal spacing between buttons */
+        }
+    </style>
 </head>
 <body>
     {% include 'navbar.html' %}  <!-- Include the navbar -->
     <div class="container">
         <h1>Spotify Playlist Analyzer</h1>
-        <p>Explore and analyze your Spotify playlists.</p>
-        <a href="{{ url_for('login') }}" class="button">Login with Spotify</a>
-        <a href="{{ url_for('analyze_playlist') }}" class="button">Analyze with Spotify URL</a>
+        <div class="button-container">
+            <a href="{{ url_for('login') }}" class="button">Login with Spotify</a>
+            <a href="{{ url_for('analyze_playlist') }}" class="button">Analyze with Spotify URL</a>
+        </div>
+        <div class="feature-section">
+            <h2>Features</h2>
+            <ul class="feature-list">
+                <li>Analyze the artists and track popularity of your Spotify playlists.</li>
+                <li>Discover which artists and tracks are most prominent in your playlists.</li>
+                <li>Sort and explore your playlists based on different criteria.</li>
+                <li>View detailed insights about your playlists, including artist counts and track popularity.</li>
+            </ul>
+        </div>
+ 
+        <div class="additional-content">
+            <h2 class="content-title">Explore Your Music</h2>
+            <p class="content-paragraph">Uncover fascinating insights about your music preferences and discover new trends in your playlists. Dive deep into your music library and gain a better understanding of your favorite artists and tracks.</p>
+        </div>
+        
+        <div class="additional-content">
+            <h2 class="content-title">Easy and Convenient</h2>
+            <p class="content-paragraph">Our Spotify Playlist Analyzer makes it effortless to analyze your playlists. With just a few clicks, you can gain valuable information about your music choices and make informed decisions about your playlists.</p>
+        </div>
     </div>
 </body>
 </html>

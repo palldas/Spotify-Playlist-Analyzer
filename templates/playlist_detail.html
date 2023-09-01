@@ -3,6 +3,7 @@
 <head>
     <title>Playlist Detail</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
     {% include 'navbar.html' %}  <!-- Include the navbar -->
@@ -13,47 +14,55 @@
         <a href="{{ playlist_external_urls }}" class="playlist-link" target="_blank">
             <img src="{{ cover_image_url }}" alt="Playlist Cover" class="playlist-cover with-shadow">
         </a>
-        <h2>Artist Count</h2>
-    <div class="sorting-options">
-        <div class="select-container">
-            <label for="artist-sort">Sort by:</label>
-            <select id="artist-sort">
-                <option value="count">Highest to Lowest</option>
-                <option value="countLowToHigh">Lowest to Highest</option>
-                <option value="alphabetical">Alphabetical A-Z</option>
-                <option value="reverseAlphabetical">Alphabetical Z-A</option>
-            </select>
-        </div>
+        <!-- Update the search bar and sorting options layout -->
+<h2>Artist Count</h2>
+<div class="search-sort-container">
+    <div class="select-container">
+        <label for="artist-sort">Sort by:</label>
+        <select id="artist-sort">
+            <option value="count">Highest to Lowest</option>
+            <option value="countLowToHigh">Lowest to Highest</option>
+            <option value="alphabetical">Alphabetical A-Z</option>
+            <option value="reverseAlphabetical">Alphabetical Z-A</option>
+        </select>
     </div>
-    <div class="analysis-box artist-count-box">
-        <ul id="artist-list">
-            <!-- Artist count list will be dynamically generated here -->
-            {% for artist, count in artist_counts.items() %}
-            <li><span class="detail-name">{{ artist }}</span>: {{ count }}</li>
-            {% endfor %}
-        </ul>
+    <div class="search-container">
+        <input type="text" id="artist-search" placeholder="Search for an artist...">
     </div>
+</div>
+<div class="analysis-box artist-count-box">
+    <ul id="artist-list">
+        <!-- Artist count list will be dynamically generated here -->
+        {% for artist, count in artist_counts.items() %}
+        <li><span class="detail-name">{{ artist }}</span>: {{ count }}</li>
+        {% endfor %}
+    </ul>
+</div>
 
-    <h2>Track Popularity Index</h2>
-    <div class="sorting-options">
-        <div class="select-container">
-            <label for="track-sort">Sort by:</label>
-            <select id="track-sort">
-                <option value="popularity">Highest to Lowest</option>
-                <option value="popularityLowToHigh">Lowest to Highest</option>
-                <option value="alphabetical">Alphabetical A-Z</option>
-                <option value="reverseAlphabetical">Alphabetical Z-A</option>
-            </select>
-        </div>
+<h2>Track Popularity Index</h2>
+<div class="search-sort-container">
+    <div class="select-container">
+        <label for="track-sort">Sort by:</label>
+        <select id="track-sort">
+            <option value="popularity">Highest to Lowest</option>
+            <option value="popularityLowToHigh">Lowest to Highest</option>
+            <option value="alphabetical">Alphabetical A-Z</option>
+            <option value="reverseAlphabetical">Alphabetical Z-A</option>
+        </select>
     </div>
-    <div class="analysis-box track-popularity-box">
-        <ul id="track-list">
-            <!-- Track popularity list will be dynamically generated here -->
-            {% for track_name, popularity in sorted_track_popularity %}
-            <li><span class="detail-name">{{ track_name }}</span>: {{ popularity }}</li>
-            {% endfor %}
-        </ul>
+    <div class="search-container">
+        <input type="text" id="track-search" placeholder="Search for a track...">
     </div>
+</div>
+<div class="analysis-box track-popularity-box">
+    <ul id="track-list">
+        <!-- Track popularity list will be dynamically generated here -->
+        {% for track_name, popularity in sorted_track_popularity %}
+        <li><span class="detail-name">{{ track_name }}</span>: {{ popularity }}</li>
+        {% endfor %}
+    </ul>
+</div>
+
         <script>
             var sortedTrackPopularity = {{ sorted_track_popularity | tojson }};
             var artistCounts = {{ artist_counts | tojson }};
