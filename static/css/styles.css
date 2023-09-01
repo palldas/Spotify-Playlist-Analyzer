@@ -50,6 +50,7 @@ a {
   font-size: 1.2rem;
   transition: background-color 0.3s;
   text-decoration: none; /* Remove default underline for links */
+  margin-top: 15px; /* Add space between the button and input box */
 }
 
 .button:hover {
@@ -232,3 +233,30 @@ a:hover {
 .select-container:hover {
   border-color: #007bff;
 }
+
+/* styles.css */
+
+/* ... (your existing styles) */
+
+.input-box {
+  width: 95%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #333;
+  background-color: #f0f0f0; /* Light gray background */
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+.input-box::placeholder {
+  color: #999; /* Placeholder text color */
+}
+
+.input-box:focus {
+  outline: none;
+  border-color: #007bff;
+  background-color: #fff; /* White background on focus */
+}
+
+/* ... (your existing styles) */
