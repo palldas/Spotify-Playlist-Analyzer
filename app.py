@@ -37,11 +37,11 @@ def redirectPage():
     code = request.args.get('code')
     token_info = sp_oauth.get_access_token(code)
     session[TOKEN_INFO] = token_info
-    return redirect(url_for('getPlaylists', _external=True))
+    return redirect(url_for('userPlaylists', _external=True))
 
 
-@app.route('/getPlaylists')
-def getPlaylists():
+@app.route('/userPlaylists')
+def userPlaylists():
     try:
         token_info = get_token()
     except:
@@ -163,6 +163,7 @@ def playlist_detail(playlist_name):
     
     # Fetch playlist details to get cover image URL
     playlist = sp.playlist(playlist_id)
+    print(playlist)
     cover_image_url = playlist['images'][0]['url']
     
     # Fetch all playlist tracks
@@ -174,6 +175,7 @@ def playlist_detail(playlist_name):
         offset += 100
         if len(response['items']) < 100:
             break
+    # print(playlist_tracks)
     
     # Calculate artist count using the count_artists function
     artist_counts = count_artists(playlist_tracks)

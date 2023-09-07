@@ -185,6 +185,7 @@ a:hover {
 /* Arrow icon */
 .select-container::after {
   content: '\25BC'; /* Unicode character for downward arrow */
+  color: gray;
   position: absolute;
   top: 50%;
   right: 10px;
