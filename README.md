@@ -39,5 +39,4 @@ Replace `your_client_id` and `your_client_secret` with your actual Spotify devel
 6. Access the application in your web browser at `http://localhost:5000`.
 
 ## License
-This project is licensed under the MIT License.
-                                   -----------
+This project is licensed under the **MIT License**.
