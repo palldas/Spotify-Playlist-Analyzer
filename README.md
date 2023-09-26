@@ -2,6 +2,8 @@
 
 The **Spotify Playlist Analyzer** is a web application that allows users to analyze and gain insights into their Spotify playlists. With this tool, you can explore the artists and track popularity within your playlists, sort and filter your playlists based on various criteria, and discover new trends in your music library.
 
+![](https://github.com/palldas/spotify-playlist-analyzer/blob/main/readme.gif)
+
 ## Features
 
 - **Login with Spotify:** Log in to your Spotify account to access your playlists and analyze them.
