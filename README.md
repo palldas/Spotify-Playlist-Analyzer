@@ -10,19 +10,6 @@ The **Spotify Playlist Analyzer** is a web application that allows users to anal
 - **Sort and Filter:** Sort your playlists by artist count or track popularity, and filter them by various criteria.
 - **Discover Trends:** Gain insights into your music preferences and discover new trends within your playlists.
 
-## How to Use
-
-1. **Login with Spotify or URL:** Click on the "Login with Spotify" button to log in to your Spotify account. If you don't wish to log in with Spotify, you can click "Analyze with Spotify URL" and paste a URL link into the search bar.
-2. **Select a Playlist:** After logging in, you will see a list of your playlists. Click on a playlist to analyze it.
-3. **Analyze the Playlist:** Once you've selected a playlist, you can view details such as artist count and track popularity. You can also sort the data based on your preferences.
-4. **Explore Insights:** Explore the insights about your music library and make informed decisions about your playlists.
-
-## Technologies Used
-
-- Flask: A Python web framework for building the backend of the application.
-- Spotify API: Used to access user playlists and retrieve playlist details.
-- Spotipy: A Python library for interacting with the Spotify Web API.
-
 ## Setup Instructions
 To set up this project locally, follow these steps:
 
@@ -38,6 +25,19 @@ Replace `your_client_id` and `your_client_secret` with your actual Spotify devel
 
 5. Run the Flask application using `python3 app.py` or `flask run`.
 6. Access the application in your web browser at `http://localhost:5000`.
+
+## How to Use
+
+1. **Login with Spotify or URL:** Click on the "Login with Spotify" button to log in to your Spotify account. If you don't wish to log in with Spotify, you can click "Analyze with Spotify URL" and paste a URL link into the search bar.
+2. **Select a Playlist:** After logging in, you will see a list of your playlists. Click on a playlist to analyze it.
+3. **Analyze the Playlist:** Once you've selected a playlist, you can view details such as artist count and track popularity. You can also sort the data based on your preferences.
+4. **Explore Insights:** Explore the insights about your music library and make informed decisions about your playlists.
+
+## Technologies Used
+
+- Flask: A Python web framework for building the backend of the application.
+- Spotify API: Used to access user playlists and retrieve playlist details.
+- Spotipy: A Python library for interacting with the Spotify Web API.
 
 ## License
 This project is licensed under the **MIT License**.
