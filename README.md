@@ -37,7 +37,6 @@ To set up this project locally, follow these steps:
 Replace `your_client_id` and `your_client_secret` with your actual Spotify developer credentials.
 
 5. Run the Flask application using `python3 app.py` or `flask run`.
-
 6. Access the application in your web browser at `http://localhost:5000`.
 
 ## License
