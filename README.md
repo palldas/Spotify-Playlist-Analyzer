@@ -33,13 +33,10 @@ To set up this project locally, follow these steps:
 `SPOTIPY_CLIENT_ID=your_client_id`
 `SPOTIPY_CLIENT_SECRET=your_client_secret`
 `SPOTIPY_REDIRECT_URI=http://localhost:5000/redirect`
+
 Replace `your_client_id` and `your_client_secret` with your actual Spotify developer credentials.
 5. Run the Flask application using `python3 app.py` or `flask run`.
 6. Access the application in your web browser at `http://localhost:5000`.
-
-Contributors
-[Your Name]
-[Contributor Name]
 
 ## License
 This project is licensed under the MIT License.
