@@ -1,5 +1,3 @@
-// Add this code after the existing code in scripts.js
-
 // Artist sorting dropdown
 const artistSortDropdown = document.getElementById('artist-sort');
 const artistList = document.getElementById('artist-list');

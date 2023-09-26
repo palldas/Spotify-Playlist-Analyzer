@@ -5,8 +5,8 @@ import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 import time
 import re
-from flask_mail import Message, Mail
-from textblob import TextBlob
+# from flask_mail import Message, Mail
+# from textblob import TextBlob
 from datetime import timedelta
 
 
@@ -186,7 +186,6 @@ def playlist_detail(playlist_name):
     return render_template('playlist_detail.html', playlist_name=playlist['name'], artist_counts=artist_counts, sorted_track_popularity=sorted_track_popularity, cover_image_url=cover_image_url, playlist_external_urls=playlist_external_urls)
 
 
-
 def count_artists(playlist_tracks):
     artist_counts = {}
     for track in playlist_tracks:
@@ -227,21 +226,21 @@ def create_spotify_oauth():
         scope="user-library-read playlist-read-private")
 
 # was testing something random with ai ignore    
-@app.route('/analyze_sentiment', methods=['POST'])
-def analyze_sentiment():
-    text = request.form['text']
-    blob = TextBlob(text)
-    sentiment = blob.sentiment
+# @app.route('/analyze_sentiment', methods=['POST'])
+# def analyze_sentiment():
+#     text = request.form['text']
+#     blob = TextBlob(text)
+#     sentiment = blob.sentiment
 
-    if sentiment.polarity > 0:
-        sentiment_label = 'Positive'
-    elif sentiment.polarity < 0:
-        sentiment_label = 'Negative'
-    else:
-        sentiment_label = 'Neutral'
+#     if sentiment.polarity > 0:
+#         sentiment_label = 'Positive'
+#     elif sentiment.polarity < 0:
+#         sentiment_label = 'Negative'
+#     else:
+#         sentiment_label = 'Neutral'
 
-    return render_template('result.html', text=text, sentiment=sentiment_label)
+#     return render_template('result.html', text=text, sentiment=sentiment_label)
 
-@app.route('/test')
-def test():
-    return render_template('test.html')
+# @app.route('/test')
+# def test():
+#     return render_template('test.html')

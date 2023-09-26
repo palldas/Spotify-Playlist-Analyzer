@@ -94,8 +94,6 @@ a:hover {
   color: red;
 }
 
-/* styles.css */
-
 /* Navbar styles */
 .navbar {
   background-color: #1db954;
@@ -129,7 +127,6 @@ a:hover {
   color: #ffffff; /* Change color on hover */
 }
 
-/* Add styles for the new sections */
 .navbar li:nth-child(2),
 .navbar li:nth-child(3),
 .navbar li:nth-child(4) {
@@ -182,7 +179,7 @@ a:hover {
   width: 200px;
 }
 
-/* Arrow icon */
+/* Arrow icon, maybe make nicer later*/
 .select-container::after {
   content: '\25BC'; /* Unicode character for downward arrow */
   color: gray;
@@ -205,8 +202,6 @@ a:hover {
 }
 
 
-
-/* Add CSS styles for the search bar and sorting options with switched positions */
 .search-sort-container {
   display: flex;
   align-items: center;
@@ -235,10 +230,6 @@ a:hover {
   border-color: #007bff;
 }
 
-/* styles.css */
-
-/* ... (your existing styles) */
-
 .input-box {
   width: 95%;
   padding: 12px;
@@ -259,5 +250,3 @@ a:hover {
   border-color: #007bff;
   background-color: #fff; /* White background on focus */
 }
-
-/* ... (your existing styles) */
