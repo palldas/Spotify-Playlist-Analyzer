@@ -16,7 +16,7 @@ app = Flask(__name__)
 app.secret_key = "somethingrandom54321"
 app.config['SESSION_COOKIE_NAME'] = 'Test Pall Cookie'
 TOKEN_INFO = "token_info"
-app.permanent_session_lifetime = timedelta(minutes=60)  #added so i don't have to keep deleting the .cache file let's see if this works pls, Set an appropriate session lifetime
+app.permanent_session_lifetime = timedelta(minutes=60)  #added so i don't have to keep deleting the .cache file, Set an appropriate session lifetime
 
 @app.route('/')
 def index():
