@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Contact</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+  <body>
+    {% include 'navbar.html' %}  <!-- Include the navbar -->  
+    <main>
+        <h1 class ="page-title">Contact</h1>
+        <form id ="contact-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="Name" required/>
+
+            <label for="email">Email: </label>
+            <input type="email" id="email" name="email" required/>
+
+            <label for="message">Message: </label>
+            <textarea id="message" name="message" required></textarea>
+            
+            <input type="submit" value="Submit" />
+            <br><br>
+        <div class = "external-links">
+            <a href="https://github.com/palldas" target="_blank"><img src="gitlogo.png" alt="Github" width = 100, height="100"></a>
+            <a href="https://www.linkedin.com/in/palldas/" target="_blank"><img src="linkedin.png" alt="Linkedin" width = 90, height="90"></a>
+            <a href="mailto:padas@calpoly.edu" target="_blank"><img src="mail.png" alt="Gmail" width = 100, height="100"></a>
+        </div> 
+    </main>
+    <footer class ="footer">
+        © 2023 Pallavi's Website | All Rights Reserved
+    </footer>  
+</body>
+</html>

@@ -22,9 +22,13 @@ app.permanent_session_lifetime = timedelta(minutes=60)  #added so i don't have t
 def index():
     return render_template('index.html')
 
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
 @app.route('/login')
 def login():
-    # return 'pls work omg'
+    # return 'pls work'
     sp_oauth = create_spotify_oauth()
     auth_url = sp_oauth.get_authorize_url()
     return redirect(auth_url)
@@ -218,29 +222,9 @@ def get_token():
         token_info = sp_oauth.refresh_access_token(token_info['refresh_token'])
     return token_info
 
-def create_spotify_oauth():
+def create_spotify_oauth(): # import client Id and client secret from the secrets file
     return SpotifyOAuth(
-        client_id = "8bfe8077435543dfa9fb5e84255cfaed",
-        client_secret = "ebece8f7edfd4bf681d0c55a754fa321",
+        client_id = clientId,
+        client_secret = clientSecret,
         redirect_uri=url_for('redirectPage', _external=True),
         scope="user-library-read playlist-read-private")
-
-# was testing something random with ai ignore    
-# @app.route('/analyze_sentiment', methods=['POST'])
-# def analyze_sentiment():
-#     text = request.form['text']
-#     blob = TextBlob(text)
-#     sentiment = blob.sentiment
-
-#     if sentiment.polarity > 0:
-#         sentiment_label = 'Positive'
-#     elif sentiment.polarity < 0:
-#         sentiment_label = 'Negative'
-#     else:
-#         sentiment_label = 'Neutral'
-
-#     return render_template('result.html', text=text, sentiment=sentiment_label)
-
-# @app.route('/test')
-# def test():
-#     return render_template('test.html')
