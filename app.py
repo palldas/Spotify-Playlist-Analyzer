@@ -1,20 +1,19 @@
-# from lib2to3.pgen2 import token
-# from re import I
-from flask import Flask, request, url_for, session, redirect, render_template, request
+from flask import Flask, request, url_for, session, redirect, render_template
+from dotenv import load_dotenv
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 import time
 import re
-# from flask_mail import Message, Mail
-# from textblob import TextBlob
 from datetime import timedelta
+import os
 
+# Load environment variables from .env file
+load_dotenv()
 
 app = Flask(__name__)
 
-
-app.secret_key = "somethingrandom54321"
-app.config['SESSION_COOKIE_NAME'] = 'Test Pall Cookie'
+app.secret_key = os.getenv("SECRET_KEY")
+app.config['SESSION_COOKIE_NAME'] = os.getenv("SESSION_COOKIE_NAME")
 TOKEN_INFO = "token_info"
 app.permanent_session_lifetime = timedelta(minutes=60)  #added so i don't have to keep deleting the .cache file, Set an appropriate session lifetime
 
@@ -28,21 +27,18 @@ def contact():
 
 @app.route('/login')
 def login():
-    # return 'pls work'
     sp_oauth = create_spotify_oauth()
     auth_url = sp_oauth.get_authorize_url()
     return redirect(auth_url)
 
 @app.route('/redirect')
 def redirectPage():
-    # return 'redirect'
     sp_oauth = create_spotify_oauth()
     session.clear()
     code = request.args.get('code')
     token_info = sp_oauth.get_access_token(code)
     session[TOKEN_INFO] = token_info
     return redirect(url_for('userPlaylists', _external=True))
-
 
 @app.route('/userPlaylists')
 def userPlaylists():
@@ -56,7 +52,6 @@ def userPlaylists():
     user_info = sp.me()  # Fetch the user's information
     user_display_name = user_info['display_name']  # Get the user's display name
     user_profile_picture = user_info['images'][0]['url'] if user_info['images'] else None
-
 
     all_playlists = []
     sp.user
@@ -74,7 +69,6 @@ def userPlaylists():
     playlist_names = [playlist['name'] for playlist in all_playlists]
     
     return render_template('playlists.html', playlist_names=playlist_names, user_display_name=user_display_name, user_profile_picture=user_profile_picture)
-
 
 @app.route('/analyze', methods=['GET', 'POST'])
 def analyze_playlist():
@@ -101,7 +95,6 @@ def extract_playlist_id(playlist_url):
         return playlist_id
 
     return None  # Return None if no match is found
-
 
 @app.route('/playlist_url')
 def playlist_detail_url():
@@ -134,7 +127,6 @@ def playlist_detail_url():
     playlist_external_urls = playlist.get('external_urls', {}).get('spotify', None)
     
     return render_template('playlist_detail.html', playlist_name=playlist['name'], artist_counts=artist_counts, sorted_track_popularity=sorted_track_popularity, cover_image_url=cover_image_url, playlist_external_urls=playlist_external_urls)
-
 
 @app.route('/playlist/<playlist_name>')
 def playlist_detail(playlist_name):
@@ -189,7 +181,6 @@ def playlist_detail(playlist_name):
     
     return render_template('playlist_detail.html', playlist_name=playlist['name'], artist_counts=artist_counts, sorted_track_popularity=sorted_track_popularity, cover_image_url=cover_image_url, playlist_external_urls=playlist_external_urls)
 
-
 def count_artists(playlist_tracks):
     artist_counts = {}
     for track in playlist_tracks:
@@ -201,7 +192,6 @@ def count_artists(playlist_tracks):
     sorted_artist_counts = dict(sorted(artist_counts.items(), key=lambda item: item[1], reverse=True))
     return sorted_artist_counts
  
-    
 def analyze_track_popularity(playlist_tracks):
     track_popularity = []
     for track in playlist_tracks:
@@ -222,9 +212,9 @@ def get_token():
         token_info = sp_oauth.refresh_access_token(token_info['refresh_token'])
     return token_info
 
-def create_spotify_oauth(): # import client Id and client secret from the secrets file
+def create_spotify_oauth():
     return SpotifyOAuth(
-        client_id = clientId,
-        client_secret = clientSecret,
+        client_id=os.getenv("CLIENT_ID"),
+        client_secret=os.getenv("CLIENT_SECRET"),
         redirect_uri=url_for('redirectPage', _external=True),
         scope="user-library-read playlist-read-private")
